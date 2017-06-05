@@ -27,6 +27,7 @@
 * **O** f
 * **A** pplication
 * **S** tate
+
 [See wiki:  Very nice Example](https://en.wikipedia.org/wiki/HATEOAS)
 
 ## PUT 

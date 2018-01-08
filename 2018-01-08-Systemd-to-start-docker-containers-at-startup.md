@@ -14,6 +14,8 @@ Requires=docker.service
 [Service]
 ExecStart=/usr/local/bin/docker-compose --file /home/lihe/dockers/ci-docker-compose.yml up -d
 ExecStop=/usr/local/bin/docker-compose --file /home/lihe/dockers/ci-docker-compose.yml stop
+#ExecStart=/usr/bin/docker start xxxxx
+#ExecStop=/usr/bin/docker stop xxxx
 RemainAfterExit=yes
 
 [Install]

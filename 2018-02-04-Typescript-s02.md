@@ -61,7 +61,7 @@ import * as lodash from 'lodash';
 
 * `*.d.ts`
 * DefinitlyTyped on github
-* microsoft.github.io/typesearch
+* https://microsoft.github.io/TypeSearch/
 ```bash
 npm install --save lodash
 npm install --save @types/lodash

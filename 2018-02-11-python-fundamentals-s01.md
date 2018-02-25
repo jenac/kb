@@ -1,4 +1,4 @@
-# Course and bookd
+# Course and books
 * Python fundamentals - the python apprentice
 * Python beyond the basics - the python jorneyman
 * Advance Python - the python master

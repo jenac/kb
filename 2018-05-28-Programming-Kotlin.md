@@ -89,5 +89,127 @@ for (k in list) {
     ...
 }
 
-val set = setOf(1,2 )
+val set = setOf(1,2)
+for (s in set) {
+    ...
+}
+
+for (a in 1..50) {
+    ...
+}
 ```
+* **ranges are handled by index for better performance**
+* for works on any iterable
+* Array can also use indices extension
+```kotlin
+for (index in array.indices) {
+    println("element $index is ${array[index]})")
+}
+```
+
+## Exception Handling
+* all exceptions in kotlin is unchecked
+
+## Instantiating Classes
+* no `new` key word
+```kotlin
+val file = File("someFolder/someFile")
+```
+
+## Referential equality and Structual equality
+* referential equality: use `===` or `!==`
+* structual equality: use `==` or `!=`
+
+## This expression
+* In member of class, `this` refers to the class instance
+* In extensions,   `this` refers to the instance that extension function was applied to:
+```kotlin
+class C {
+    ...
+}
+
+fun C?.toString() {
+    if (this == null) return "null"
+    return "the actual value"
+}
+```
+
+### Scope
+* label
+```kotlin
+class Building (val address: String) {
+    inner class Reception(telephone: String) {
+        fun printAddress() = println(this@Building.address)
+    }
+}
+```
+
+## Visibility modifiers
+### private
+* private top level function, class, interface only visible within the same file
+* in class, only visible within the class
+
+### protected
+* not allowed for top level
+
+### internal
+* visible in same module
+
+## Control flow as expression
+* expression vs statement: expression is evaluable, statement is not
+* `if...else` and `try...catch` are expressions
+```kotlin
+val date = Date()
+val today = if (date.year == 2018) true else false
+
+fun isZero(x: Int): Boolean {
+    return if (x==0) true else false
+}
+
+val success = try {
+    readFile()
+    true
+} catch (e: IOException) {
+    false
+}
+```
+**when use `if` as expression, must have `else` to cover all the cases**
+
+## Null syntax
+* nullable must explicit:
+```kotlin
+val s:String? = null //ok
+val s:String = null //compile error
+```
+* `is` for type checking:
+```kotlin
+fun isString(any: Any): Boolean {
+    return if (any is String) true else false
+}
+```
+
+### smart cast
+* compiler is intelligent to figure out type:
+```kotlin
+//when check length, compiler can tell any is String 
+fun isEmptyString(any: Any): Boolean {
+    return any is String && any.length == 0
+}
+
+fun isNotStringOrEmpty(any: Any): Boolean {
+    return any !is String || any.length == 0
+}
+```
+
+### explicit casting
+* `as`
+```kotlin
+val s = any as String
+```
+* if cannot cast, `ClassCastException` will be thrown
+* if want return null when cannot cast, declare with nullable:
+```kotlin
+val any = "someFolder/someFile"
+val string: String? = any as String //ok, success cast
+val file: File? = any as File //ok, file is null now.
+``` 

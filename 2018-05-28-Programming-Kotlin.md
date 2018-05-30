@@ -213,3 +213,15 @@ val any = "someFolder/someFile"
 val string: String? = any as String //ok, success cast
 val file: File? = any as File //ok, file is null now.
 ``` 
+
+## When expression
+### when (value)
+* like `switch` in Java
+```kotlin
+fun what(x: Int) {
+    when(x) {
+        0-> println("zero")
+    }
+}
+
+```

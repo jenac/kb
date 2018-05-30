@@ -220,7 +220,9 @@ val file: File? = any as File //ok, file is null now.
 ```kotlin
 fun what(x: Int) {
     when(x) {
-        0-> println("zero")
+        0 -> println("zero")
+        1 -> println("one")
+        else -> println("ok")
     }
 }
 

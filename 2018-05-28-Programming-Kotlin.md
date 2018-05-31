@@ -227,3 +227,108 @@ fun what(x: Int) {
 }
 
 ```
+**when must cover all the cases, use `else` or make sure all cases are covered.**
+* use as an expression
+```kotlin
+fun isMinOrMax(x: Int): Boolean {
+    val isIt = when (x) {
+        Int.MAX_VALUE -> true
+        Int.MIN_VALUE -> true
+        else -> false
+    }
+    return isIt
+}
+
+//this is better
+fun isZeroOrOne(x: Int): Boolean {
+    return when(x) {
+        0, 1 -> true
+        else -> false
+    }
+}
+```
+
+* use function as a case
+```kotlin
+fun isAbs(x: Int): Boolean {
+    return when(x) {
+        Math.abs(x) -> true
+        else -> false
+    }
+}
+```
+
+* use range
+```kotlin
+fun isSingleDigit(x: Int): Boolean {
+    return when(x) {
+        in -9..9 -> true
+        else -> false
+    }
+}
+```
+
+* in list
+```kotlin
+fun isDieNumber(x: Int): Boolean {
+    return when(x) {
+        in lisfOf(1,2,3,4,5,6) -> true
+        else -> false
+    }
+}
+```
+
+* type checking
+```kotlin
+fun startsWithFoo(any: Any): Boolean {
+    return when(any) {
+        is String -> any.startsWith("Foo")
+        else -> false
+    }
+}
+```
+
+### when without argument
+* `if ... else` like style
+```kotlin
+fun whenWithoutArgs(x: Int, y: Int) {
+    when {
+        x<y -> println ("x is less than y")
+        x>y -> println ("x is greater than y")
+        else -> println ("x == y")
+    }
+}
+```
+
+## Function return
+
+* By default, `return` returns from the nearest enclosing function or anonymous function.
+```kotlin
+fun printLessThanTwo() {
+    val list = listOf(1,2,3,4)
+    list.forEach{ fun(x) {
+        if (x<2) println(x)
+        else return //just return the internal function
+        }
+        println("this line still prints for 3 and 4")
+    }
+}
+```
+
+* use label to return outside function
+```kotlin
+fun printUntilStop() {
+    val list = listOf("a", "b", "stop", "c")
+    list.forEach {
+        if (it == "stop") return @forEach
+        else println(it)
+    }
+}
+```
+
+## Type hierarchy
+* `Any` is like `Object` in Java, it is base class for all others types. It defines `toString`, `hashCode`, `equals`, `apply`, `let`, `to`.
+
+* `Unit` like `void`, but it is a singleton
+
+* `Nothing` is subclass for all other types

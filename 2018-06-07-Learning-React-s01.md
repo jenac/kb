@@ -119,4 +119,85 @@ var [last] = [...peaks].reverse() //it copies!
 console.log(last) //Rose
 console.log(peaks) //Tallac, Ralston, Rose
 ```
-* 
+* Used on object
+```javascript
+var morning = {
+  breakfast: "oatmeal",
+  lunch: "peanut butter and jelly"
+}
+
+var dinner = "mac and cheese"
+
+var backpackingMeals = {
+  ...morning,
+  dinner
+}
+
+console.log(backpackingMeals) // { breakfast: "oatmeal", lunch: "peanut butter and jelly", dinner: "mac and cheese"}
+```
+
+## Promise
+```javascript
+const getFakeMembers = count => new Promise((resolves, rejects) => {
+  ...
+  //some actions, resolves, rejects are callbacks
+})
+
+//usage:
+getFakeMembers(5).then(
+  data => console.log(data), //callback: resolves
+  err => console.err(...) //callback: rejects
+)
+```
+
+## Classes
+* ES6 introduces class. 
+```javascript
+class Vacation { //by convention data type starts with uppercase
+  constructor(destination, length) {
+    this.destination = destination
+    this.length = length
+  }
+
+  print() {
+    console.log(...)
+  }
+}
+//usage:
+const trip =  new Vacation("some place", 5)
+trip.print()
+```
+* Class can be extend/inheritance
+```javascript
+class Expedition extends Vacation {
+  constructor(dest, length, gear) {
+    super(dest, length)
+    this.gear = gear
+  }
+
+  print() {
+    super.print()
+    console.log("...some other stuff ...")
+  }
+}
+```
+**ES6 class use prototypal inherientance**
+
+## ES6 Modules
+* `export`
+* `export default`
+* `import`
+* `import A as B`
+* `import *`
+
+## CommonJS
+```javascript
+const print(message) => log(message, new Date())
+const log(message, timestamp) => console.log(`${timestamp.toString()}: ${message}`)
+module.exports = {print, log} //CommonJS export
+
+//CommonJs use require not import
+const {log, print} = require('./file.js')
+```
+
+

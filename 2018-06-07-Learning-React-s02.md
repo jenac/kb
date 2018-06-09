@@ -113,3 +113,49 @@ getFakeMembers(20).then(
 //grandpa23 -> attemped to load 20 fake members
 //grandpa23 -> successfully loaded 20 members
 ```
+
+### Recursion
+* function recall itself.
+```javascript
+const countDown = (value, fn) => {
+    fn(value)
+    return (value > 0) ? countDown(value-1, fn) : value
+}
+
+countDown(10, value => console.log(value))
+//10
+//9
+//8
+...
+//1
+//0
+```
+* a useful recursive function demo
+```javascript
+const deepPick = (fields, object={}) => {
+    const [first, ...remaining] = fields.split(".")
+    return (remaining.length) ? deepPick(remaining.join("."), object[first]) : object[first]
+}
+
+var dan = {
+    type: "person",
+    data: {
+        gender: "male",
+        info: {
+            id: 22,
+            fullname: {
+                first: "Dan",
+                last: "Deacon"
+            }
+        }
+    }
+}
+
+deepPick("type", dan) //person
+deepPick("data.info.fullname.last") //Deacon
+```
+
+### Composition
+
+
+

@@ -156,6 +156,23 @@ deepPick("data.info.fullname.last") //Deacon
 ```
 
 ### Composition
+* Different composition patterns
+```javascript
+//chain:
+const ctime=a.replace('s', '1')
+  .replace('t', '2')
+  .replace('v', '2')
 
+//function compsition
+const both = functionOne(functionTwo(arg))
+
+//function as args
+const all = putAll(function1, function2, function3)
+```
+
+### Put it all together
+* Keep data immutable
+* Keep functions pure - accept at least one argument, return data or anthoter function
+* Use recursion over looping(when possible)
 
 

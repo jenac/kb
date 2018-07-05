@@ -66,5 +66,81 @@ React.DOM.h1(null, "Baked Salmon") //first arg is for properties, second is for 
   )}
 </ul>
 ```
+### Recipes as JSX
+```javascript
+// The data, an array of Recipe objects
+var data = [ ... ];
+// A stateless functional component for an individual Recipe
+const Recipe = (props) => (
+...
+)
+// A stateless functional component for the Menu of Recipes
+const Menu = (props) => (
+...
+  <Recipe ...
+...
+)
+// A call to ReactDOM.render to render our Menu into the current DOM
+ReactDOM.render(
+<Menu recipes={data} title="Delicious Recipes" />,
+document.getElementById("react-container")
+)
+```
 ## Babel
+* presets
 ## Intro to Webpack
+* Code splitting
+* Minification
+* Feature flagging
+* Hot Module Replacement
+
+### Webpack loaders
+* install web pack and dependencies
+```
+sudo npm install -g webpack
+npm install babel-core babel-loader babel-preset-env babel-preset-react babel-preset-stage-0 --save-dev
+npm install react react-dom --save
+```
+
+### Webpack configuration
+* `webpack.config.js`
+```javascript
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: "dist/assets",
+    filename: "bundle.js" //output dist/assets/bundle.js
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        loader: ['babel-loader'],
+        query: {
+          presets: ['env', 'stage-0', 'react']
+        }
+      }
+    ]
+  }
+}
+```
+
+### Loading the bundle
+* index.html
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React Recipes App</title>
+  </head>
+  <body>
+    <div id="react-container"></div>
+    <script src="assets/bundle.js"></script>
+  </body>
+</html>
+```
+
+* **Others: source mapping, build css and so on.**
+* **use `create-react-app` instead**

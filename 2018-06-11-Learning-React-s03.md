@@ -34,6 +34,37 @@ React.createElement("ul",
 ### React.createClass
 * `React.createClass` may deprecate in future
 ### React.Component
+* es6
+```javascript
+class SomeComponent extends React.Component {
+  ...
+}
+
+```
 ### Stateless Functional Components
+* Stateless functional components are functions, not objects; therefore, they do not have a “this” scope.
+* Functions for only to rendering.
+* Pass data using props
 ## DOM Rendering
 ## Factories
+* Using createFactory to create an h1
+```javascript
+React.DOM.h1(null, "Baked Salmon") //first arg is for properties, second is for the children
+```
+
+# React with JSX
+## React Elements as JSX
+### JSX Tips
+* Nested Components
+* className will generate HTML `class=""` for css style.
+* Javascript expression wrappered in `{ }`, and will evaluated.
+* Mapping array to JSX:
+```javascript
+<ul>
+  {this.props.ingredients.map((ingredient, i) =>
+    <li key={i}>{ingredient}</li>
+  )}
+</ul>
+```
+## Babel
+## Intro to Webpack

@@ -102,7 +102,7 @@ const userLogs = username => messages =>
     //userLogs is high order function, 
     //message => is the  curried funciton?
 
-const log = userLogs("grandpa23)    
+const log = userLogs("grandpa23")    
 
 log ("attemped to load 20 fake members")
 getFakeMembers(20).then(

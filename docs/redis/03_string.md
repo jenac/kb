@@ -23,4 +23,3 @@
 | `setrange <key> <start> <value>` | overwrite value on key with position `start` |
 | `setex <key> <expire> <value>` | set value with expire in seconds |
 | `getset <ke> <value>` | set new value and return the old value |
-| `` | |

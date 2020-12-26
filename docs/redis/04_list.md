@@ -36,5 +36,5 @@
     lpush k1 vx vx vx
     lrem k1 2 vx
     lrange 0 -1
-    #output: vx
+    //output: vx
     ```

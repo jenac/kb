@@ -32,6 +32,7 @@
     * delete n*value from left
     * if n<0, from right
     * if n=0, delete all value in list
+
     ```
     lpush k1 vx vx vx
     lrem k1 2 vx

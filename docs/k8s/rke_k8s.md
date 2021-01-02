@@ -107,3 +107,6 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 * Install LENS: https://k8slens.dev/
 * Add cluster: **use the same config file for kubectl**
 ![](res/2021-01-02-07-47-59.png)
+* Turn on `Metrics Stack`(Prometheus) on LENS:
+  * right click the cluster icon, then `settings`
+![](res/2021-01-02-10-42-15.png)

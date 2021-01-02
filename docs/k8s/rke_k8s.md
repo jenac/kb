@@ -102,3 +102,8 @@ CoreDNS is running at https://192.168.1.171:6443/api/v1/namespaces/kube-system/s
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
+
+## Connect cluster using LENS
+* Install LENS: https://k8slens.dev/
+* Add cluster: **use the same config file for kubectl**
+![](res/2021-01-02-07-47-59.png)

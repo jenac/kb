@@ -3,7 +3,7 @@
 ## redis.conf
 * docker image: docker.io/bitnami/redis:latest, location: /opt/bitnami/redis/etc/redis.conf
 * `tcp-backlog` depends on /proc/sys/net/core/somaxconn, need set both.
-* `maxmemory-policy: MAXMEMORY POLICY, how Redis will select what to remove when maxmemory is reached. You can select one from the following behaviors:
+* `maxmemory-policy`: MAXMEMORY POLICY, how Redis will select what to remove when maxmemory is reached. You can select one from the following behaviors:
     * volatile-lru -> Evict using approximated LRU, only keys with an expire set.
     * allkeys-lru -> Evict any key using approximated LRU.
     * volatile-lfu -> Evict using approximated LFU, only keys with an expire set.

@@ -18,7 +18,7 @@
 * `zrangebyscore key min max [withscores] [limit offset count]`
     * Returns all the elements in the sorted set at key with a score between min and max (including elements with score equal to min or max). The elements are considered to be ordered from low to high scores.
 
-* `zrangebyscore key max min [withscores] [limit offset count]`
+* `zrevrangebyscore key max min [withscores] [limit offset count]`
     * same with above, but reversed order
 
 * `zincrby <key> <increment> <value>`

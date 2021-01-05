@@ -73,6 +73,8 @@ save 60 10000
 * copy backup file to redis working folder
 * start redis, data will be loaded 
 
+![](res/2021-01-05-14-09-33.png)
+
 ### RDB 的优点
 * 节省磁盘空间
 * 恢复快速

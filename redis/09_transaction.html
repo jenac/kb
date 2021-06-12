@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.2.1, mkdocs-material-7.1.7" name="generator"/>
+<title>Transactions - Lihe's Notes</title>
+<link href="../assets/stylesheets/main.ca7ac06f.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.f1a3b89f.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+</head>
+<body data-md-color-accent="none" data-md-color-primary="none" data-md-color-scheme="" dir="ltr">
+<script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#transactions">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Lihe's Notes" class="md-header__button md-logo" data-md-component="logo" href="../index.html" title="Lihe's Notes">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Lihe's Notes
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Transactions
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Lihe's Notes" class="md-nav__button md-logo" data-md-component="logo" href="../index.html" title="Lihe's Notes">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    Lihe's Notes
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../index.html">
+        Welcome to Lihe's Notes
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2">
+        Archived
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Archived" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          Archived
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1">
+        Angular
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Angular" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span>
+          Angular
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s01.html">
+        Angluar Basics
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s02.html">
+        Nested Components
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s03.html">
+        Navigation and Routers
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s04.html">
+        Angular Cli
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s05.html">
+        MISC
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2">
+        Dotnet
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Dotnet" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span>
+          Dotnet
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/dotnet/dotnet_s01.html">
+        dotNET QA
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3">
+        Golang
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Golang" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span>
+          Golang
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/golang/golang_s01.html">
+        Environment Setup
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4">
+        Kotlin
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Kotlin" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span>
+          Kotlin
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/kotlin/kotlin_s00.html">
+        Programming with Objects
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/kotlin/kotlin_s01.html">
+        Starting with Kotlin
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/kotlin/kotlin_s02.html">
+        OOP in Kotlin
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5">
+        Linux
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Linux" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/linux/linux_s01.html">
+        Ubuntu 16.04 no wifi at start up issue
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/linux/linux_s02.html">
+        Systemd to start docker containers at startup
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/linux/linux_s03.html">
+        Allow insecure registry for docker on Ubuntu
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6">
+        Python
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Python" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/python/python_s00.html">
+        Python 3
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/python/python_s01.html">
+        Course and books
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/python/python_s02.html">
+        Strings and Collections
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7">
+        React
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="React" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span>
+          React
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/react/learning_react_s01.html">
+        Emerging Javascript
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/react/learning_react_s02.html">
+        Functional Programming with JavaScript
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/react/learning_react_s03.html">
+        Pure React
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/react/learning_react_s04.html">
+        Props, State, and the Component Tree
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_8" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8">
+        Ts
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Ts" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+          Ts
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/ts/ts_01.html">
+        Install &amp; config
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/ts/ts_02.html">
+        Creating and using typescript module
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_9" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9">
+        Web
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Web" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/web/web_s01.html">
+        Diff HTML5 Local storage vs. Session storage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/web/web_s02.html">
+        REST+JSON API Design - Best Practices
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/web/web_s03.html">
+        CORS and withCredentials issue
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3">
+        K8s
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="K8s" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+          K8s
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../k8s/helm_k8s.html">
+        About HELM
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../k8s/k3s.html">
+        Install kubectl
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../k8s/k8s-setup.html">
+        Install and Configure Kubernetes (k8s) on Ubuntu 18.04 LTS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../k8s/rke_k8s.html">
+        Create K8S cluster using RKE
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4">
+        Ops
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Ops" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          Ops
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ops/01_vault.html">
+        Install HashCorp Vault on Raspberry Pi
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ops/02_jenkins_on_pi.html">
+        Install Jenkins on raspberry pi
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5">
+        Redis
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Redis" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Redis
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="01_intro.html">
+        Redis Intro
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="02_key_ops.html">
+        Common Operations on Key
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="03_string.html">
+        String
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="04_list.html">
+        List
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="05_set.html">
+        Set
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="06_hash.html">
+        Hash
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="07_zset.html">
+        Zset (sorted set)
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="08_redis_conf.html">
+        Redis configuration file
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Transactions
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="09_transaction.html">
+        Transactions
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#related-commands">
+    Related commands
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#no-roll-back">
+    No roll back
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#redis">
+    Redis的事务定义
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#multi-exec-discard">
+    Multi, Exec, Discard
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+    事务的错误处理
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#optimistic-lock-vs-pessimistic-lock">
+    Optimistic lock vs Pessimistic lock
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#watch-key1-key2">
+    Watch key1 [key2 ...]
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#unwatch">
+    Unwatch
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="10_persistance_rdb.html">
+        Redis Persistence - RDB
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="11_persistence_aof.html">
+        Redis Persistence - AOF
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="12_replication.html">
+        Redis Replication
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="13_cluster.html">
+        Redis Cluster
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#related-commands">
+    Related commands
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#no-roll-back">
+    No roll back
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#redis">
+    Redis的事务定义
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#multi-exec-discard">
+    Multi, Exec, Discard
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+    事务的错误处理
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#optimistic-lock-vs-pessimistic-lock">
+    Optimistic lock vs Pessimistic lock
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#watch-key1-key2">
+    Watch key1 [key2 ...]
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#unwatch">
+    Unwatch
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="transactions">Transactions</h1>
+<p>MULTI, EXEC, DISCARD and WATCH are the foundation of transactions in Redis. They allow the execution of a group of commands in a single step, with two important guarantees:</p>
+<ul>
+<li>All the commands in a transaction are serialized and executed sequentially.</li>
+<li>Either all of the commands or none are processed(processed does not mean success) , so a Redis transaction is also atomic. </li>
+<li><strong>Errors inside a transaction does not rollback</strong>.</li>
+</ul>
+<h2 id="related-commands">Related commands</h2>
+<ul>
+<li>DISCARD</li>
+<li>EXEC</li>
+<li>MULTI</li>
+<li>UNWATCH</li>
+<li>WATCH</li>
+</ul>
+<h2 id="no-roll-back">No roll back</h2>
+<h2 id="redis">Redis的事务定义</h2>
+<ul>
+<li>Redis的事务是一个单独的隔离操作，事务中所有命令都会序列化，按顺序执行。在执行事务的过程中，不会被其他客户端发送过来的命令请求所打断</li>
+<li>Redis事务的主要作用就是串联多个命令防止插队</li>
+</ul>
+<h2 id="multi-exec-discard">Multi, Exec, Discard</h2>
+<ul>
+<li>从输入Multi命令开始，输入的命令都会依次进入队列中，但不会执行，知道输入Exec后，Redis会依次执行队列中的命令</li>
+<li>组队的过程中可以通过Discard来放弃组队
+<img alt="" src="res/2021-01-03-06-16-19.png"/></li>
+</ul>
+<h2 id="_1">事务的错误处理</h2>
+<ul>
+<li>组队中某个命令出现了错误，执行时整个队列都会被取消。
+<img alt="" src="res/2021-01-03-06-18-24.png"/></li>
+<li>如果执行阶段某个命令报出错误，则只有报错命令不会被执行，其他命令都会执行，不会回滚。
+<img alt="" src="res/2021-01-03-06-19-56.png"/></li>
+</ul>
+<h2 id="optimistic-lock-vs-pessimistic-lock">Optimistic lock vs Pessimistic lock</h2>
+<ul>
+<li>
+<p>悲观锁(Pessimistic Lock)， 顾名思义，就是很悲观， 每次去拿数据的时候都会认为别人会修改， 所以每次在拿数据的时候都会上锁， 这样别人想拿这个数据就会block直到它拿到锁。传统的关系型数据库里边就用到了很多这种锁机制， 比如行锁，表锁，读锁，写锁等。都是在做操作之前先上锁。</p>
+</li>
+<li>
+<p>乐观锁(Optimistic Lock)，顾名患义，就是很乐观， 每次去拿数据的时候都认为别人不会修改， 所以不会上锁， 但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。乐观锁适用于多读的应用类型，这祥可以提高吞吐量。 Redis就是利用这种Check-and-Set机制实现事务的。</p>
+</li>
+</ul>
+<p><img alt="" src="res/2021-01-03-15-30-36.png"/></p>
+<h2 id="watch-key1-key2"><code>Watch key1 [key2 ...]</code></h2>
+<ul>
+<li>在执行MULTI之前先执行<code>Watch key1[key2 ...]</code>可以监视一个(或多个)key, 如果在事务执行之前这个(或这些)key被其他命令改动，那么事务将被中断。</li>
+</ul>
+<h2 id="unwatch"><code>Unwatch</code></h2>
+<ul>
+<li>取消<code>Watch</code>命令对所有key的监视</li>
+<li>如果在执行<code>Watch</code>之后， <code>Exec</code>或者<code>Discard</code>命令先被执行，那么就不需要再执行<code>Unwatch</code>了。</li>
+</ul>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Redis configuration file" class="md-footer__link md-footer__link--prev" href="08_redis_conf.html" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              Redis configuration file
+            </div>
+</div>
+</a>
+<a aria-label="Next: Redis Persistence - RDB" class="md-footer__link md-footer__link--next" href="10_persistance_rdb.html" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Next
+              </span>
+              Redis Persistence - RDB
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+<script src="../assets/javascripts/bundle.76f349be.min.js"></script>
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</body>
+</html>

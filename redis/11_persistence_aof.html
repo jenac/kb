@@ -1,0 +1,782 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.2.1, mkdocs-material-7.1.7" name="generator"/>
+<title>Redis Persistence - AOF - Lihe's Notes</title>
+<link href="../assets/stylesheets/main.ca7ac06f.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.f1a3b89f.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+</head>
+<body data-md-color-accent="none" data-md-color-primary="none" data-md-color-scheme="" dir="ltr">
+<script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#redis-persistence-aof">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Lihe's Notes" class="md-header__button md-logo" data-md-component="logo" href="../index.html" title="Lihe's Notes">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Lihe's Notes
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Redis Persistence - AOF
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Lihe's Notes" class="md-nav__button md-logo" data-md-component="logo" href="../index.html" title="Lihe's Notes">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    Lihe's Notes
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../index.html">
+        Welcome to Lihe's Notes
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2">
+        Archived
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Archived" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          Archived
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1">
+        Angular
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Angular" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span>
+          Angular
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s01.html">
+        Angluar Basics
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s02.html">
+        Nested Components
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s03.html">
+        Navigation and Routers
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s04.html">
+        Angular Cli
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/angular/angular_s05.html">
+        MISC
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2">
+        Dotnet
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Dotnet" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span>
+          Dotnet
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/dotnet/dotnet_s01.html">
+        dotNET QA
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3">
+        Golang
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Golang" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span>
+          Golang
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/golang/golang_s01.html">
+        Environment Setup
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4">
+        Kotlin
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Kotlin" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span>
+          Kotlin
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/kotlin/kotlin_s00.html">
+        Programming with Objects
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/kotlin/kotlin_s01.html">
+        Starting with Kotlin
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/kotlin/kotlin_s02.html">
+        OOP in Kotlin
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5">
+        Linux
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Linux" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/linux/linux_s01.html">
+        Ubuntu 16.04 no wifi at start up issue
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/linux/linux_s02.html">
+        Systemd to start docker containers at startup
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/linux/linux_s03.html">
+        Allow insecure registry for docker on Ubuntu
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6">
+        Python
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Python" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/python/python_s00.html">
+        Python 3
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/python/python_s01.html">
+        Course and books
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/python/python_s02.html">
+        Strings and Collections
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7">
+        React
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="React" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span>
+          React
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/react/learning_react_s01.html">
+        Emerging Javascript
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/react/learning_react_s02.html">
+        Functional Programming with JavaScript
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/react/learning_react_s03.html">
+        Pure React
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/react/learning_react_s04.html">
+        Props, State, and the Component Tree
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_8" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8">
+        Ts
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Ts" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+          Ts
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/ts/ts_01.html">
+        Install &amp; config
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/ts/ts_02.html">
+        Creating and using typescript module
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_9" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9">
+        Web
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Web" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/web/web_s01.html">
+        Diff HTML5 Local storage vs. Session storage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/web/web_s02.html">
+        REST+JSON API Design - Best Practices
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../archived/web/web_s03.html">
+        CORS and withCredentials issue
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3">
+        K8s
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="K8s" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+          K8s
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../k8s/helm_k8s.html">
+        About HELM
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../k8s/k3s.html">
+        Install kubectl
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../k8s/k8s-setup.html">
+        Install and Configure Kubernetes (k8s) on Ubuntu 18.04 LTS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../k8s/rke_k8s.html">
+        Create K8S cluster using RKE
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4">
+        Ops
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Ops" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          Ops
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ops/01_vault.html">
+        Install HashCorp Vault on Raspberry Pi
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ops/02_jenkins_on_pi.html">
+        Install Jenkins on raspberry pi
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5">
+        Redis
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Redis" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Redis
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="01_intro.html">
+        Redis Intro
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="02_key_ops.html">
+        Common Operations on Key
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="03_string.html">
+        String
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="04_list.html">
+        List
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="05_set.html">
+        Set
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="06_hash.html">
+        Hash
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="07_zset.html">
+        Zset (sorted set)
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="08_redis_conf.html">
+        Redis configuration file
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="09_transaction.html">
+        Transactions
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="10_persistance_rdb.html">
+        Redis Persistence - RDB
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Redis Persistence - AOF
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="11_persistence_aof.html">
+        Redis Persistence - AOF
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof">
+    AOF
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof_1">
+    AOF文件故障备份
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof_2">
+    AOF文件检查，恢复
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aofconfig">
+    AOF同步频率设置(config文件配置)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rewrite">
+    Rewrite
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#redis">
+    Redis如何实现重写?
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#config">
+    何时重写(config文件配置)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof_3">
+    AOF的优点
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof_4">
+    AOF缺点
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+    用哪个好
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="12_replication.html">
+        Redis Replication
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="13_cluster.html">
+        Redis Cluster
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof">
+    AOF
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof_1">
+    AOF文件故障备份
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof_2">
+    AOF文件检查，恢复
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aofconfig">
+    AOF同步频率设置(config文件配置)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rewrite">
+    Rewrite
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#redis">
+    Redis如何实现重写?
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#config">
+    何时重写(config文件配置)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof_3">
+    AOF的优点
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aof_4">
+    AOF缺点
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+    用哪个好
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="redis-persistence-aof">Redis Persistence - AOF</h1>
+<h2 id="aof">AOF</h2>
+<ul>
+<li>
+<p>以曰志的形式来记录每个写操作， 将Redis执行过的所有写指令记录下来(读操作不记录)， 只许追加文件但不可以改写文件， Redis启动之初会读取该文件重新构建数据。 </p>
+</li>
+<li>
+<p>AOF默认不开启，需要在配置文件中配置
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>...
+appendonly yes
+# The name of the append only file (default: "appendonly.aof")
+appendfilename "appendonly.aof"
+</code></pre></div>
+</td></tr></table></p>
+</li>
+</ul>
+<h2 id="aof_1">AOF文件故障备份</h2>
+<ul>
+<li>
+<p>AOF的备机制和性能虽然和RDB不同，但是备份和恢复操作同RDB一样，都是拷贝备份文件，需要恢复时再拷贝到Redis工作目录下，启动系统即加载。</p>
+</li>
+<li>
+<p>AOF和RDB同时启动，系统默认读取AOF的数据</p>
+</li>
+</ul>
+<h2 id="aof_2">AOF文件检查，恢复</h2>
+<p>如果AOF文件损坏，可以通过redis提供的外部工具进行恢复
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>redis-check-aof --fix appendonly.aof
+</code></pre></div>
+</td></tr></table>
+RDB have the same utility: <code>redis-check-rdb</code></p>
+<h2 id="aofconfig">AOF同步频率设置(config文件配置)</h2>
+<ul>
+<li><code>always</code>： 每次写入都会同步</li>
+<li><code>everysec</code>： 每秒</li>
+<li><code>no</code>： 不主动同步，把同步时机交给操作系统管理</li>
+</ul>
+<h2 id="rewrite">Rewrite</h2>
+<ul>
+<li>AOF采用文件追加方式， 文件会越来越大。 为避免出现此种情况，新增了重写机制， 当AOF文件的大小超过所设定的阈值时， Redis就会启动AOF文件的内容压缩, 只保留可以恢复数据的最小令集。 可以使用命令<code>bgrewriteaof</code>。</li>
+</ul>
+<h2 id="redis">Redis如何实现重写?</h2>
+<ul>
+<li>AOF文件持续增长而过大时， 会<code>fork</code>出一个新进程来将文件重写(也是先写入临时文件，再rename), 遍历新进程的内存中数据， 每条记录有一条的set语句。 重写AOF文件并不读取旧的AOF文件，而是将内存数据库的内容用命令方式重写一遍。</li>
+</ul>
+<h2 id="config">何时重写(config文件配置)</h2>
+<ul>
+<li>重写虽然可以节约大量磁盘空间 减少′恢复时间。 但是每次重写还是有一定的负担的。 因此设定Redis要满足一定条件才会进行重写。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+</code></pre></div>
+</td></tr></table></li>
+<li>系统载入时或者上次重写完毕时， Redis会记录此时AOF文件大小，设为<code>base_size</code>，如果当前AOF文件大小<code>&gt;=base_Size+base_Size*100%</code> (默认)且当前大小<code>&gt;=64mb</code>(默认)的情况下，redis会进行AOF重写。</li>
+</ul>
+<h2 id="aof_3">AOF的优点</h2>
+<ul>
+<li>备份机制稳健， 丢失数据概率低</li>
+<li>可读的日志文件， 可以处理误操作</li>
+</ul>
+<p><img alt="" src="res/2021-01-05-14-44-50.png"/></p>
+<h2 id="aof_4">AOF缺点</h2>
+<ul>
+<li>比RDB占用更多的磁盘空间</li>
+<li>恢复备份速度慢</li>
+<li>每次写都同步的话，有一定的性能损失</li>
+<li>Has some known issues</li>
+</ul>
+<h2 id="_1">用哪个好</h2>
+<ul>
+<li>官方推荐两个都启用。</li>
+<li>如果对数据不敏感， 可以单独用RDB。</li>
+<li>不建议单独使用AOF, for there is known issues.</li>
+<li>如果纯做缓存， 可以都不用。</li>
+</ul>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Redis Persistence - RDB" class="md-footer__link md-footer__link--prev" href="10_persistance_rdb.html" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              Redis Persistence - RDB
+            </div>
+</div>
+</a>
+<a aria-label="Next: Redis Replication" class="md-footer__link md-footer__link--next" href="12_replication.html" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Next
+              </span>
+              Redis Replication
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+<script src="../assets/javascripts/bundle.76f349be.min.js"></script>
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</body>
+</html>
